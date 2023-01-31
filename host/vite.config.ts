@@ -5,15 +5,14 @@ import vue from "@vitejs/plugin-vue";
 import { quasar, transformAssetUrls } from "@quasar/vite-plugin";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  const prod = mode === "production";
-  const dev = mode === "development";
-  return {
+export default defineConfig({
+  
     build: {
       target: "esnext",
       minify: false,
       cssCodeSplit: false,
       rollupOptions: {
+        external: ["remote/QuasarExample"],
         output: {
           minifyInternalExports: false,
         },
@@ -27,7 +26,7 @@ export default defineConfig(({ mode }) => {
         sassVariables: "src/styles/quasar-variables.sass",
       }),
       federation({
-        remotes: dev && {
+        remotes: {
           remote: {
             external: `Promise.resolve('http://localhost:5337/assets/remote.js')`,
             externalType: "promise",
@@ -44,5 +43,4 @@ export default defineConfig(({ mode }) => {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
-  };
 });
