@@ -25,4 +25,9 @@ const props = defineProps<IConfirmationDialogProps>();
 const { active: activeRef } = toRefs(props);
 const emit = defineEmits<(event: "continue" | "cancel") => void>();
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.q-card {
+  padding: 8px;
+  min-width: 512px;
+}
+</style>
